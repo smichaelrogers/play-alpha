@@ -1,0 +1,40 @@
+<div class="board">
+  <% for(var i = 0; i < 8; i++) { %>
+    <div class="row">
+      <% for(var j = i * 8; j < (i * 8) + 8; j++) { %>
+        <div class="square" data-square="<%= j %>">
+          <%= board[j] %>
+        </div>
+      <% }; %>
+    </div>
+  <% }; %>
+</div>
+
+<div class="moves">
+  <% moves.forEach(function(move) { %>
+    <div class="move" data-fen="<%= move.fen %>">
+      <%= move.fen %><br>
+      <%= move.from %><br>
+      <%= move.to %><br>
+    </div>
+  <% }); %>
+</div>
+
+
+<h1>root</h1>
+<h3><%= root.fen %></h3>
+<h5><%= root.from %> -> <%= root.to %></h5>
+<h5><%= root.piece %> -> <%= root.target %></h5>
+
+<hr>
+<h3><%= nodes %></h3>
+<h4><%= nps %></h4>
+<% npp.forEach(function(ply) { %> 
+  <p>
+    ply: <%= ply.ply %><strong> nodes: <%= ply.nodes %></strong>
+  </p>
+<% }); %>
+
+<h1><%= status %> (status)</h1>
+
+<h2><%= height %></h2>

@@ -1,0 +1,7 @@
+<div class="board">
+  <% @data.board.each do |square| %>
+    <div class="square">
+      <%= square[:piece] %> | <%= square[:moves].count %>
+    </div>
+  <% end %>
+</div>
