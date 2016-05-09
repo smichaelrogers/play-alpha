@@ -9,12 +9,9 @@ gem 'thin'
 gem 'sprockets'
 gem 'sass'
 
+gem 'uglifier'
+gem 'autoprefixer-rails'
 
 group :development do
   gem 'better_errors'
-end
-
-group :production do
-  gem 'uglifier'
-  gem 'autoprefixer-rails'
 end
