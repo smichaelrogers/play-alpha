@@ -1,5 +1,51 @@
-<div class="content">
-  
-</div>
-<a href="/positions">start</a>
-<button type="button" id="start">start</button>
+<section id="top">
+  <div class="container">
+    <div class="nav">
+      <div class="nav-group">
+        <a class="nav-title" href="#top">Alpha</a>
+      </div>
+      <div class="nav-group">
+        <a class="nav-item" id="new-game" href="#">New Game</a>
+        <a class="nav-item" target="_blank" href="https://github.com/smichaelrogers/alpha">View on GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="main">
+  <div class="container">
+    <div class="aligner">
+      <div class="board-outer">
+        <div class="board-inner" id="board">
+          <% 8.times do |i| %>
+            <div class="rank">
+              <% 8.times do |j| %>
+                <div class="square" data-square="<%= Alpha::PP[(i*8)+j] %>"></div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div id="log">
+        
+        <div class="collapsed" id="log-content">
+          
+        </div>
+        <div class="log-control">
+          <a href="#" id="log-toggle">Toggle output</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="footer">
+  <div class="footer-content">
+    <p>
+      by Scott M. Rogers
+    </p>
+    <p>
+      <a href="https://github.com/smichaelrogers">GitHub</a> - 
+      <a href="https://www.linkedin.com/in/smichaelrogers">Linkedin</a> - 
+      <a href="https://twitter.com/smichaelrogers">Twitter</a>
+    </p>
+  </div>
+</section>
