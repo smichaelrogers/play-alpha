@@ -12,7 +12,6 @@ gem 'autoprefixer-rails'
 gem 'redis'
 
 group :production do
-  
   gem 'uglifier'
   gem 'newrelic_rpm'
 end

@@ -2,12 +2,12 @@
 
 A web application for playing chess against [Alpha](https://github.com/smichaelrogers/alpha)
 
-[![ui](./screen.png)](https://www.playalpha.xyz)
+[![ui](./screen.png)](http://www.playalpha.xyz)
 
 ---
 
 ## Live
-[Play it here](http://www.playalpha.xyz)
+[Play it here](http://www.playalpha.xyz)  (work in progress)
 
 [Original chess engine](https://github.com/smichaelrogers/alpha)
 
