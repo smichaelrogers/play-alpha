@@ -6,6 +6,7 @@ module Alpha
       @log = []
     end
     
+    
     def find_move(duration: 2.0)
       @nodes, @height, @clock, @ply = 0, 1, 0, 0
       @result = 'none'
@@ -16,27 +17,26 @@ module Alpha
         @result = @check ? CLR[@mn] : 'draw'
         return
       end
-      
       start = Time.now
       
       while @clock < duration && @height < MAXPLY
         @height += 1
-        
         @roots.each do |r|
           make(r.move)
           r.score = -alphabeta(-INF, INF, @height)
           unmake(r.move)
         end
-        
         @clock = (Time.now - start).round(2)
         @root = @roots.sort!.first
+        
         @log << "> Searched #{@nodes - ln} nodes from height #{@height} @ #{
                 ((@nodes - ln).to_f/(@clock - lc)).round(2)}/s, current move: #{@root.to_s}"
         lc, ln = @clock, @nodes
       end
-
+      
       @log << "" << "Making move: #{@root.to_s}"
       make(@root.move)
+      
       @fen, @check, @board = @root.fen, @root.check, {}
       PP.each_with_index { |sq, i| @board[sq] = { piece: @squares[SQ[i]], color: @colors[SQ[i]], moves: [] } }
       if generate_roots
@@ -48,12 +48,15 @@ module Alpha
       true
     end
     
+    
     def generate_roots
       @history = Array.new(MAXPLY) { Array.new(6) { Array.new(120) { 0 } } }
       @moves = Array.new(MAXPLY) { [] }
       @roots = []
+      
       generate_moves.each do |m|
         next unless make(m)
+        
         @roots << Root.new(m.dup, @mn, -evaluate, get_fen, get_san(m)).tap do |r| 
           r.check = in_check?(@mx)
           r.san += '+' if r.check
@@ -175,7 +178,6 @@ module Alpha
       end
       false
     end
-  
     
   end
 end
