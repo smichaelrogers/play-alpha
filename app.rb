@@ -18,7 +18,7 @@ class App < Sinatra::Application
       @alpha.load_position
     end
     
-    @alpha.find_move(duration: 1.0)
+    @alpha.find_move(duration: 2.0)
     
     if @alpha.game_over?
       redis.lpush('results', @alpha.result)
