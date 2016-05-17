@@ -1,22 +1,13 @@
-require 'rubygems'
-require 'bundler'
-Bundler.require(:default)
-require './lib/alpha'
 require './app'
-
 
 map '/assets' do
   e = Sprockets::Environment.new
-  %w(javascripts stylesheets fonts).each { |path| e.append_path("assets/#{path}") }
-  configure :production do
-    e.js_compressor = :uglify
-    e.css_compressor = :scss
-    AutoprefixerRails.install(e)
-  end
-  
+  e.append_path('assets/javascripts')
+  e.append_path('assets/stylesheets')
+  AutoprefixerRails.install(e)
   run e
 end
 
 map '/' do
-  run Sinatra::Application
+  run App
 end

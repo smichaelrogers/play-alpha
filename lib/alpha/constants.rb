@@ -19,10 +19,13 @@ module Alpha
   DIAG   = [11, -11, -9, 9].freeze
   ORTH   = [1, 10, -1, -10].freeze
   OCTL   = [-9, 9, -11, 11, -10, 10, -1, 1].freeze
-  SIDES  = [-1, 1, -9, 9, -11, 11].freeze
   STEPS  = [DIR, STEP, DIAG, ORTH, OCTL, OCTL, DIR].freeze
   SLIDES = [false, false, true, true, true, false, false].freeze
-       
+  
+  FEN = { 'P' => [0, 0], 'N' => [0, 1], 'B' => [0, 2], 'R' => [0, 3], 'Q' => [0, 4], 'K' => [0, 5],
+          'p' => [1, 0], 'n' => [1, 1], 'b' => [1, 2], 'r' => [1, 3], 'q' => [1, 4], 'k' => [1, 5],
+          'e' => [6, 6] }.freeze
+          
   FILES = %w(a b c d e f g h).freeze
   RANKS = %w(1 2 3 4 5 6 7 8).freeze
   PIECES = [%w(P N B R Q K e).freeze, %w(p n b r q k e).freeze].freeze
@@ -51,7 +54,7 @@ module Alpha
   PP   = SQ.map { |i| FILES[(i % 10) - 1] + RANKS[9 - (i / 10)] }
   SQ64 = Array.new(120) { -1 }.tap { |a| 64.times { |i| a[SQ[i]] = i } }.freeze
   
-  VAL  = [100, 320, 330, 500, 900, 2000, 0].freeze
+  VAL  = [100, 320, 330, 500, 900, 0, 0].freeze
   MOB  = [1, 3, 2, 2, 1, 0, 0].freeze
   ATK  = [1, 3, 3, 5, 9, 11, 0].freeze
   POS  = [[0,  0,  0,  0,  0,  0,  0,  0, 50, 50, 50, 50, 50, 50, 50, 50, 10, 10, 20, 30, 30, 20, 10, 10, 5,  5, 10, 25, 25, 10,  5,  5, 0,  0,  0, 20, 20,  0,  0,  0, 5, -5,-10,  0,  0,-10, -5,  5, 5, 10, 10,-20,-20, 10, 10,  5, 0,  0,  0,  0,  0,  0,  0,  0].freeze, 

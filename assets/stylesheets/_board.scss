@@ -1,15 +1,52 @@
-.board-outer {
+#board {
   z-index: 9999;
+  transform: rotateX(15deg);
   width: 440px;
   padding: 16px;
   background: #eee;
   border: 4px double #ddd;
   border-radius: 4px;
-  box-shadow: -2px 4px 6px 0px rgba(0,0,0,0.1), 
-              0px 8px 12px -8px rgba(0,0,0,0.1), 
-            -16px 24px 24px -16px rgba(0,0,0,0.1);
+  box-shadow: 16px 54px 32px -32px rgba(0,0,0,0.1), 4px 40px 16px -24px rgba(0,0,0,0.1);
+  
+  &::after {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 16px;
+    color: #555;
+    width: 100%;
+    top: 0;
+    left: 0;
+    transition: all 300ms ease-in-out;
+  }
+  
+  
+  &.ready::after {
+    height: 0;
+    content: '';
+    background: rgba(#FFFFFF, 0);
+    overflow: hidden;
+  }
+  
+  &.waiting::after, &.loading::after {
+    height: 100%;
+    overflow: visible;
+  }
+  
+  &.waiting::after {
+    content: 'Waiting for response';
+    background: rgba(#FFFFFF, 0.4);
+  }
+  &.loading::after {
+    content: 'Loading position';
+    background: rgba(#FFFFFF, 0.2);
+  }
 }
-.board-inner {
+
+.squares {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -28,10 +65,12 @@
     background: #ddd;
   }
 }
+
 .piece {
   color: #5E667A;
   font-size: 28px;
 }
+
 .square {
   cursor: pointer;
   flex: none;
@@ -42,9 +81,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: all 150ms ease;
+  &:hover {
+    .piece {
+      color: #465987;
+    }
+  }
+  &.selected {
+    background: rgba(#8969F1, 0.25) !important;
+  }
+  &.selected > .piece {
+    color: #fff;
+  }
   &.valid::after, 
   &.selected::after {
     position: absolute;
+    transform: all 150ms ease;
     top: 0;
     left: 0;
     content: '';
@@ -52,9 +104,11 @@
     height: 100%;
   }
   &.valid::after {
-    background: rgba(#F7FF58, 0.51);
+    background: rgba(#008CFF, 0.15);
   }
   &.selected::after {
-    background: rgba(#FF934F, 0.49);
+    background: rgba(#0085FF, 0.15);
   }
 }
+
+

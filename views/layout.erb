@@ -1,12 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="PlayAlpha is a chess web app for playing against Alpha, an AI programmed in Ruby">
         <link rel="stylesheet" href="./assets/application.css">
-        <title></title>
+        <link rel="canonical" href="http://playalpha.xyz">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <title>Alpha - Chess engine in Ruby</title>
     </head>
+    
     <body>
-      <%= yield %>
+      
+      <header>
+        <nav class="nav">
+          <div class="nav-group">
+            <a class="nav-title" href="/">Alpha</a>
+          </div>
+          <div class="nav-group">
+            <a class="nav-item" href="#">View on GitHub</a>
+            <a class="nav-item" id="new-game" href="/play">New game</a>
+          </div>
+        </nav>
+      </header>
+      
+      
+      <section>
+        <div class="container">
+          <%= yield %>
+        </div>
+      </section>
+      
+      
+      <footer>
+        <div class="container">
+          <div>
+            <p>by Scott M. Rogers</p>
+          </div>
+          
+          <div class="social-links">
+            <a href="https://github.com/smichaelrogers"><i class="icon-github"></i></a>
+            <a href="https://www.linkedin.com/in/smichaelrogers"><i class="icon-linkedin"></i></a>
+            <a href="https://twitter.com/smichaelrogers"><i class="icon-twitter"></i></a>
+          </div>
+        </div>
+      </footer>
+      
+      <script src="./vendor/jquery.min.js"></script>
       <script src="./assets/application.js"></script>
+      
     </body>
 </html>

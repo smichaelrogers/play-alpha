@@ -1,51 +1,30 @@
-<section id="top">
-  <div class="container">
-    <div class="nav">
-      <div class="nav-group">
-        <a class="nav-title" href="#top">Alpha</a>
-      </div>
-      <div class="nav-group">
-        <a class="nav-item" id="new-game" href="#">New Game</a>
-        <a class="nav-item" target="_blank" href="https://github.com/smichaelrogers/alpha">View on GitHub</a>
-      </div>
-    </div>
-  </div>
-</section>
-<section id="main">
-  <div class="container">
-    <div class="aligner">
-      <div class="board-outer">
-        <div class="board-inner" id="board">
-          <% 8.times do |i| %>
-            <div class="rank">
-              <% 8.times do |j| %>
-                <div class="square" data-square="<%= Alpha::PP[(i*8)+j] %>"></div>
-              <% end %>
-            </div>
+<% @squares = Alpha::PP.reverse %> 
+
+<div id="game">
+  
+  <div class="ready" id="board">
+    <div class="squares">
+      <% 8.times do |i| %>
+        <div class="rank">
+          <% 8.times do |j| %>
+            <div class="square" id="<%= @squares[(i * 8) + j] %>"></div>
           <% end %>
         </div>
-      </div>
-      <div id="log">
-        
-        <div class="collapsed" id="log-content">
-          
-        </div>
-        <div class="log-control">
-          <a href="#" id="log-toggle">Toggle output</a>
-        </div>
-      </div>
+      <% end %>
     </div>
   </div>
-</section>
-<section id="footer">
-  <div class="footer-content">
-    <p>
-      by Scott M. Rogers
-    </p>
-    <p>
-      <a href="https://github.com/smichaelrogers">GitHub</a> - 
-      <a href="https://www.linkedin.com/in/smichaelrogers">Linkedin</a> - 
-      <a href="https://twitter.com/smichaelrogers">Twitter</a>
-    </p>
+  
+  
+  <div class="collapsed" id="log"></div>
+  
+  <div class="controls">
+    <div>
+      <a class="disabled" id="undo" href="#"><div><i class="icon-undo2"></i></div><span>Undo move</span></a>
+    </div>
+    
+    <div>
+      <a id="toggle-log" href="#"><div><i class="icon-terminal"></i></div><span>Engine</span></a>
+    </div>
   </div>
-</section>
+  
+</div>
