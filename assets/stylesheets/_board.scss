@@ -1,6 +1,7 @@
 #board {
   z-index: 9999;
   transform: rotateX(15deg);
+  transform-style: flat;
   width: 440px;
   padding: 16px;
   background: #eee;
