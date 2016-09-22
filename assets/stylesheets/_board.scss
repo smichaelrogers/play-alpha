@@ -1,14 +1,12 @@
 #board {
   z-index: 9999;
-  transform: rotateX(15deg);
-  transform-style: flat;
   width: 440px;
   padding: 16px;
   background: #eee;
   border: 4px double #ddd;
   border-radius: 4px;
   box-shadow: 16px 54px 32px -32px rgba(0,0,0,0.1), 4px 40px 16px -24px rgba(0,0,0,0.1);
-  
+
   &::after {
     position: absolute;
     display: flex;
@@ -23,20 +21,20 @@
     left: 0;
     transition: all 300ms ease-in-out;
   }
-  
-  
+
+
   &.ready::after {
     height: 0;
     content: '';
     background: rgba(#FFFFFF, 0);
     overflow: hidden;
   }
-  
+
   &.waiting::after, &.loading::after {
     height: 100%;
     overflow: visible;
   }
-  
+
   &.waiting::after {
     content: 'Waiting for response';
     background: rgba(#FFFFFF, 0.4);
@@ -61,10 +59,12 @@
   height: 50px;
   display: flex;
   flex-flow: row nowrap;
-  &:nth-child(odd) .square:nth-child(even), 
+  &:nth-child(odd) .square:nth-child(even),
   &:nth-child(even) .square:nth-child(odd) {
     background: #ddd;
   }
+
+  
 }
 
 .piece {
@@ -94,7 +94,7 @@
   &.selected > .piece {
     color: #fff;
   }
-  &.valid::after, 
+  &.valid::after,
   &.selected::after {
     position: absolute;
     transform: all 150ms ease;
@@ -111,5 +111,3 @@
     background: rgba(#0085FF, 0.15);
   }
 }
-
-
