@@ -1,24 +1,24 @@
 module Alpha
-  
+
   class Search
-    
+
     def initialize
       @log = []
     end
-    
-    
+
+
     def find_move(duration: 2.0)
       @nodes, @height, @clock, @ply = 0, 1, 0, 0
       @result = 'none'
       lc, ln = 0, 0
       @check = in_check?(@mx)
-      
+
       unless generate_roots
         @result = @check ? CLR[@mn] : 'draw'
         return
       end
       start = Time.now
-      
+
       while @clock < duration && @height < MAXPLY
         @height += 1
         @roots.each do |r|
@@ -28,15 +28,15 @@ module Alpha
         end
         @clock = (Time.now - start).round(2)
         @root = @roots.sort!.first
-        
+
         @log << "> Searched #{@nodes - ln} nodes from height #{@height} @ #{
                 ((@nodes - ln).to_f/(@clock - lc)).round(2)}/s, current move: #{@root.to_s}"
         lc, ln = @clock, @nodes
       end
-      
+
       @log << "" << "Making move: #{@root.to_s}"
       make(@root.move)
-      
+
       @fen, @check, @board = @root.fen, @root.check, {}
       PP.each_with_index { |sq, i| @board[sq] = { piece: @squares[SQ[i]], color: @colors[SQ[i]], moves: [] } }
       if generate_roots
@@ -47,17 +47,17 @@ module Alpha
       end
       true
     end
-    
-    
+
+
     def generate_roots
       @history = Array.new(MAXPLY) { Array.new(6) { Array.new(120) { 0 } } }
       @moves = Array.new(MAXPLY) { [] }
       @roots = []
-      
+
       generate_moves.each do |m|
         next unless make(m)
-        
-        @roots << Root.new(m.dup, @mn, -evaluate, get_fen, get_san(m)).tap do |r| 
+
+        @roots << Root.new(m.dup, @mn, -evaluate, get_fen, get_san(m)).tap do |r|
           r.check = in_check?(@mx)
           r.san += '+' if r.check
         end
@@ -65,7 +65,7 @@ module Alpha
       end
       @roots.any?
     end
-    
+
 
     def alphabeta(alpha, beta, depth)
       @nodes += 1
@@ -94,7 +94,7 @@ module Alpha
         yield(to, P, EMPTY)
         to += DIR[color]
         yield(to, P, EMPTY) if @squares[to] == EMPTY && !(40..80).cover?(from)
-      
+
       else STEPS[piece].each do |step|
           to = from + step
           while @colors[to] == EMPTY
@@ -106,8 +106,8 @@ module Alpha
         end
       end
     end
-    
-    
+
+
     def generate_moves
       @moves[@ply].clear
       SQ.select { |sq| @colors[sq] == @mx }.each do |from|
@@ -118,16 +118,18 @@ module Alpha
       end
       @moves[@ply].sort_by! { |m| -m.score }
     end
-    
-    
+
+
     def evaluate
       score = 0
+
       SQ.select { |sq| @colors[sq] != EMPTY }.each do |from|
-        score += (VAL[@squares[from]] + POS[@squares[from]][FLIP[@colors[from]] * SQ64[from]]) * FLIP[@colors[from]]
-        each_move(from) do |to, piece, target|
-          score += (MOB[piece] + ATK[target] + (piece == P ? CENTER[SQ64[from]] : 0)) * FLIP[@colors[from]]
-        end
+        score += (
+          VAL[@squares[from]] +
+          POS[@squares[from]][FLIP[@colors[from]] * SQ64[from]]
+        ) * FLIP[@colors[from]]
       end
+
       score * FLIP[@mx]
     end
 
@@ -138,7 +140,7 @@ module Alpha
       @squares[m.from], @colors[m.from] = EMPTY, EMPTY
       @squares[m.to] = Q if m.piece == P && !(30..90).cover?(m.to)
       @kings[@mx] = m.to if m.piece == K
-      
+
       @mx, @mn = @mn, @mx
       if in_check?(@mn)
         unmake(m)
@@ -146,8 +148,8 @@ module Alpha
       end
       true
     end
-    
-    
+
+
     def unmake(m)
       @ply -= 1
       @mx, @mn = @mn, @mx
@@ -178,6 +180,6 @@ module Alpha
       end
       false
     end
-    
+
   end
 end
