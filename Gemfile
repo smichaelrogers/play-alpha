@@ -4,17 +4,13 @@ ruby '2.3.1'
 
 gem 'rack'
 gem 'sinatra'
-gem 'sinatra-contrib'
+gem 'sinatra-contrib', require: 'sinatra/contrib'
 gem 'thin'
 gem 'sprockets'
 gem 'sass'
 gem 'autoprefixer-rails'
 gem 'redis'
-
-group :production do
-  gem 'uglifier'
-  gem 'newrelic_rpm'
-end
+gem 'uglifier'
 
 group :development do
   gem 'pry'

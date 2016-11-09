@@ -1,6 +1,5 @@
 #board {
   z-index: 9999;
-  width: 440px;
   padding: 16px;
   background: #eee;
   border: 4px double #ddd;
@@ -44,49 +43,59 @@
     background: rgba(#FFFFFF, 0.2);
   }
 }
+#board {
+  width: 400px;
+  height: 400px;
+  @media(min-width: 768px) {
+    width: 440px;
+    height: 440px;
+  }
+}
 
 .squares {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   position: relative;
-  width: 400px;
-  height: 400px;
-}
-
-.rank {
-  flex: none;
+  height: 100%;
   width: 100%;
-  height: 50px;
-  display: flex;
-  flex-flow: row nowrap;
-  &:nth-child(odd) .square:nth-child(even),
-  &:nth-child(even) .square:nth-child(odd) {
-    background: #ddd;
-  }
-
-  
 }
 
 .piece {
   color: #5E667A;
-  font-size: 28px;
+  font-size: 20px;
+  @media(min-width: 540px) {
+    font-size: 24px;
+  }
+  @media(min-width: 768px) {
+    font-size: 28px;
+  }
 }
 
 .square {
-  cursor: pointer;
-  flex: none;
+  flex: 1 1 12.5%;
+  height: 12.5%;
+  width: 12.5%;
   position: relative;
-  height: 50px;
-  width: 50px;
+  overflow: hidden;
   background: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   transform: all 150ms ease;
+  cursor: default;
+
+  &.dark {
+    background: #ddd;
+  }
+
   &:hover {
     .piece {
       color: #465987;
     }
+  }
+
+  &.selectable, &.valid, &.selected {
+    cursor: pointer !important;
   }
   &.selected {
     background: rgba(#8969F1, 0.25) !important;

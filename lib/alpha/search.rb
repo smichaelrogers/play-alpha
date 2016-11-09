@@ -7,7 +7,7 @@ module Alpha
     end
 
 
-    def find_move(duration: 2.0)
+    def find_move(duration: 1.0)
       @nodes, @height, @clock, @ply = 0, 1, 0, 0
       @result = 'none'
       lc, ln = 0, 0

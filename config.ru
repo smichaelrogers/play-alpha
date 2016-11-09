@@ -1,13 +1,16 @@
 require './app'
 
 map '/assets' do
-  e = Sprockets::Environment.new
-  e.append_path('assets/javascripts')
-  e.append_path('assets/stylesheets')
-  AutoprefixerRails.install(e)
-  run e
+  sprockets = Sprockets::Environment.new
+  sprockets.append_path('assets/javascripts')
+  sprockets.append_path('assets/stylesheets')
+  sprockets.js_compressor  = :uglify
+  sprockets.css_compressor = :scss
+  
+  AutoprefixerRails.install(sprockets)
+  run sprockets
 end
 
 map '/' do
-  run App
+  run Sinatra::Application
 end
